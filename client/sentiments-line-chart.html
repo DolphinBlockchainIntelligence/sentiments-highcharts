@@ -1,19 +1,49 @@
-var colors = ['#f98a83', '#989898', '#85f77e']
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
 
-var app = new Vue({
+
+<style>
+body {
+  margin: 0;
+}
+.title {
+  margin: 0 10px;
+}
+.highcharts-container, .sentimentsLineChartundefined {
+  width: 100%;
+}
+</style>
+
+
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="https://unpkg.com/vue@2.4.2/dist/vue.min.js"></script>
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+
+
+<script>
+var colors = ['#f98a83', '#989898', '#85f77e']
+new Vue({
   el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  },
+  template: '<div id="sentimentsLineChart" style="min-width: 100%; width: 100%; height: 100vh; min-height: 100vh; margin: 0 auto"></div>',
   mounted () {
     this.sentimentsLineChart()
   },
   methods: {
     sentimentsLineChart: function () {
-      var highchartContainer = 'sentimentsLineChart'
+      var highchartContainer = document.getElementById('sentimentsLineChart')
       var seriesOptions = []
       var seriesCounter = 0
       var createChart = function () {
+        console.log(Highcharts.stockChart)
+        console.log(seriesOptions)
+        console.log(highchartContainer)
         Highcharts.stockChart(highchartContainer, {
           chart: {
             spacingBottom: 30
@@ -84,3 +114,5 @@ var app = new Vue({
     }
   }
 })
+</script>
+</html>
