@@ -24,7 +24,6 @@ body {
   <script src="https://unpkg.com/vue@2.4.2/dist/vue.min.js"></script>
   <script src="https://code.highcharts.com/stock/highstock.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
 
 
 <script>
@@ -41,9 +40,6 @@ new Vue({
       var seriesOptions = []
       var seriesCounter = 0
       var createChart = function () {
-        console.log(Highcharts.stockChart)
-        console.log(seriesOptions)
-        console.log(highchartContainer)
         Highcharts.stockChart(highchartContainer, {
           chart: {
             spacingBottom: 30
@@ -76,7 +72,6 @@ new Vue({
         return decodeURIComponent(results[2].replace(/\+/g, " "));
       }
       var postId = getParameterByName('id', window.location.href)
-      console.log(postId)
       var names = ['positive', 'neutral', 'negative']
       var component = this
       axios.get('/dashboard/data/btt-sentiments/S'+ postId +'.json')
