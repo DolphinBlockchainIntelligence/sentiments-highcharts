@@ -8,4 +8,5 @@ COPY server /server
 COPY client /server/public
 COPY register.json /server/register.json
 WORKDIR /server
+RUN npm install
 CMD ["node","index.js"]
