@@ -1,87 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-
-
-<style>
-body {
-  margin: 0;
-}
-
-html {
-  overflow-x: hidden;
-}
-
-.hide {
-  display: none;
-}
-
-.sentiments-comments {
-  margin: 7px 0;
-}
-
-.sentiment0 .text {
-  background: #f98a83;
-}
-
-.sentiment1 .text {
-  background: #dddddd;
-}
-
-.sentiment2 .text {
-  background: #85f77e;
-}
-
-.comments {
-  list-style: none;
-  padding: 0;
-  margin: 0 7px;
-  overflow-x: hidden;
-}
-
-.comments .comment {
-  margin-bottom: 14px;
-  overflow-x: hidden;
-}
-
-.comments .comment .heading {
-  display: flex;
-  justify-content: space-between;
-  color: #999;
-}
-
-.comments .comment .text {
-  padding: 7px 14px;
-  border-radius: 2px;
-  display: block;
-  color: #292b2c;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: .8;
-}
-
-.comments .comment .text:hover {
-  opacity: 1;
-}
-</style>
-
-
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-  <script src="https://unpkg.com/vue@2.4.2/dist/vue.min.js"></script>
-  <script src="https://code.highcharts.com/stock/highstock.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
-
-<script>
 var colors = ['#f98a83', '#989898', '#85f77e']
 new Vue({
-  el: '#app',
+  el: '#comments',
   template: 
   `
   <div id="sentiments-comments" class="sentiments-comments">
@@ -141,7 +60,8 @@ new Vue({
         return decodeURIComponent(results[2].replace(/\+/g, " "));
       }
       var postId = getParameterByName('id', window.location.href)
-      axios.get('/dashboard/data/btt-sentiments/D'+ postId +'.json')
+      axios.get('https://beta.dolphin.bi/dashboard/data/btt-sentiments/D'+ postId +'.json')
+      // axios.get('/dashboard/data/btt-sentiments/D'+ postId +'.json')
       .then(response => {
         this.commentsSource = response.data
       })
@@ -155,5 +75,3 @@ new Vue({
     }
   }
 })
-</script>
-</html>

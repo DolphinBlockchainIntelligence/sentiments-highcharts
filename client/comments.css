@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+}
+html {
+  overflow-x: hidden;
+}
+
+.hide {
+  display: none;
+}
+
+.sentiments-comments {
+  margin: 7px 0;
+}
+
+.sentiment0 .text {
+  background: #f98a83;
+}
+
+.sentiment1 .text {
+  background: #dddddd;
+}
+
+.sentiment2 .text {
+  background: #85f77e;
+}
+
+.comments {
+  list-style: none;
+  padding: 0;
+  margin: 0 7px;
+  overflow-x: hidden;
+}
+
+.comments .comment {
+  margin-bottom: 14px;
+  overflow-x: hidden;
+}
+
+.comments .comment .heading {
+  display: flex;
+  justify-content: space-between;
+  color: #999;
+}
+
+.comments .comment .text {
+  padding: 7px 14px;
+  border-radius: 2px;
+  display: block;
+  color: #292b2c;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: .8;
+}
+
+.comments .comment .text:hover {
+  opacity: 1;
+}

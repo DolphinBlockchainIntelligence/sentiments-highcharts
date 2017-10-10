@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-
-
-<style>
-body {
-  margin: 0;
-}
-.title {
-  margin: 0 10px;
-}
-.highcharts-container, .sentimentsLineChartundefined {
-  width: 100%;
-}
-</style>
-
-
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-  <script src="https://unpkg.com/vue@2.4.2/dist/vue.min.js"></script>
-  <script src="https://code.highcharts.com/stock/highstock.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
-<script>
 var colors = ['#f98a83', '#989898', '#85f77e']
 new Vue({
-  el: '#app',
+  el: '#linechart',
   template: '<div id="sentimentsLineChart" style="min-width: 100%; width: 100%; height: 100vh; min-height: 100vh; margin: 0 auto"></div>',
   mounted () {
     this.sentimentsLineChart()
@@ -74,7 +45,8 @@ new Vue({
       var postId = getParameterByName('id', window.location.href)
       var names = ['positive', 'neutral', 'negative']
       var component = this
-      axios.get('/dashboard/data/btt-sentiments/S'+ postId +'.json')
+      axios.get('https://beta.dolphin.bi/dashboard/data/btt-sentiments/S'+ postId +'.json')
+      // axios.get('/dashboard/data/btt-sentiments/S'+ postId +'.json')
       .then(response => {
         var data = response.data
         var chartData = {
@@ -109,5 +81,3 @@ new Vue({
     }
   }
 })
-</script>
-</html>
