@@ -1,7 +1,18 @@
 var colors = ['#f98a83', '#989898', '#85f77e']
 new Vue({
   el: '#linechart',
-  template: '<div id="sentimentsLineChart" style="min-width: 100%; width: 100%; height: 100vh; min-height: 100vh; margin: 0 auto"></div>',
+  template: 
+  `
+  <div>
+    <h3 v-if="heading">{{heading}}</h3>
+    <div id="sentimentsLineChart" style="min-width: 100%; width: 100%; height: 100vh; min-height: 100vh; margin: 0 auto"></div>
+  </div>
+  `,
+  data: function data() {
+    return {
+      heading: '',
+    }
+  },
   mounted () {
     this.sentimentsLineChart()
   },
@@ -34,19 +45,19 @@ new Vue({
         })
       }
       var getParameterByName = function(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
+        if (!url) url = window.location.href
+        name = name.replace(/[\[\]]/g, '\\$&')
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url)
+        if (!results) return null
+        if (!results[2]) return ''
+        return decodeURIComponent(results[2].replace(/\+/g, ' '))
       }
       var postId = getParameterByName('id', window.location.href)
+      this.heading = getParameterByName('heading', window.location.href)
       var names = ['positive', 'neutral', 'negative']
       var component = this
       axios.get('https://beta.dolphin.bi/dashboard/data/btt-sentiments/S'+ postId +'.json')
-      // axios.get('/dashboard/data/btt-sentiments/S'+ postId +'.json')
       .then(response => {
         var data = response.data
         var chartData = {

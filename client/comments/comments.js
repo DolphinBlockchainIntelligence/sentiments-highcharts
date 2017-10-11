@@ -4,6 +4,7 @@ new Vue({
   template: 
   `
   <div id="sentiments-comments" class="sentiments-comments">
+    <h3 v-if="heading">Comments:</h3>
     <ul class="comments">
         <li v-for="(comment, key) in comments" :class="'comment sentiment'+comment.Sentiment">
         <div class="heading">
@@ -14,7 +15,7 @@ new Vue({
       </li>
     </ul>
     <p align="center">
-      <a class="waves-effect waves-light btn btn-show-all" @click.prevent="toShowAll($event)">Show all</a>
+      <button class="large button hide-for-small-only" @click.prevent="toShowAll($event)">Show all</button>
     </p>
   </div>
   `,
@@ -22,7 +23,8 @@ new Vue({
     return {
       commentsSource: [],
       showNumber: 30,
-      showAll: false
+      showAll: false,
+      heading: ''
     }
   },
   mounted () {
@@ -51,17 +53,17 @@ new Vue({
   methods: {
     loadComments: function () {
       var getParameterByName = function(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
+        if (!url) url = window.location.href
+        name = name.replace(/[\[\]]/g, "\\$&")
         var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
+            results = regex.exec(url)
+        if (!results) return null
+        if (!results[2]) return ''
+        return decodeURIComponent(results[2].replace(/\+/g, " "))
       }
       var postId = getParameterByName('id', window.location.href)
+      this.heading = getParameterByName('heading', window.location.href)
       axios.get('https://beta.dolphin.bi/dashboard/data/btt-sentiments/D'+ postId +'.json')
-      // axios.get('/dashboard/data/btt-sentiments/D'+ postId +'.json')
       .then(response => {
         this.commentsSource = response.data
       })

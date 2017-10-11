@@ -6,7 +6,9 @@ new Vue({
     <h3>Bitcointalk.org sentiments</h3>
     <div class="content-wrapper">
       <div class="datatable-options mdl-textfield mdl-js-textfield mdl-shadow--2dp">
-        <input class="mdl-textfield__input" v-model="query" placeholder="Search post" />
+        <label>
+          <input type="text" v-model="query" placeholder="Search post" />
+        </label>
       </div>
       <table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
@@ -48,7 +50,7 @@ new Vue({
         </tbody>
       </table>
       <p align="center">
-        <button type="button" class="success button" @click.prevent="toShowAll($event)">Show all</button>
+        <button type="button" class="large button" @click.prevent="toShowAll($event)">Show all</button>
       </p>
     </div>
   </div>
@@ -77,8 +79,7 @@ new Vue({
       window.open(url, '_blank')
     },
     goToPost(topicId, announce) {
-      // routes.push({ name: 'Sentiment', params: { id: topicId, announce: announce }})
-      window.open('sentiment.html?id='+topicId, '_self')
+      window.open(`../sentiment/sentiment.html?id=${topicId}&heading=${announce}`, '_self')
     },
     sort: function (sortBy) {
       this.sortBy = sortBy
@@ -114,10 +115,16 @@ new Vue({
       } else {
         list = _.orderBy(list, ['hasRank', 'rank', 'NumReplies', 'DateTimeLastPost', 'announce'], ['asc', 'asc', 'desc', 'desc', 'asc'])
       }
-      list = list.map((currElement, index) => {
-        currElement['order'] = ++index
-        return currElement
+      list = list.map((item, i) => {
+        item['order'] = ++i
+        return item
       })
+
+      list = list.map((item, i) => {
+        item.DateTimeLastPost = moment( Date.parse(item.DateTimeLastPost) ).fromNow()
+        return item
+      })
+      
       if (!this.showAll) {
         list = list.slice(0, this.showNumber)
       }
