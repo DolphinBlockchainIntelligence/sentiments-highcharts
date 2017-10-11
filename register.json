@@ -1,9 +1,9 @@
 {
 	"widgets": [
-		{"title": "Sentiments: line chart", "url": "/sentiments-line-chart.html?id=2047503"},
-		{"title": "Sentiments: comments", "url": "/sentiments-comments.html?id=2047503"}
+		{"title": "Sentiments: line chart", "url": "/linechart/linechart.html?id=2047503"},
+		{"title": "Sentiments: comments", "url": "/comments/comments.html?id=2047503"}
 	],
 	"pages": [
-		{"title": "Sentiments", "url": "/sentiments.html"}
+		{"title": "Sentiments", "url": "/sentiments/sentiments.html"}
 	]
 }
